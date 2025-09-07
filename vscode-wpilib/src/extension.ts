@@ -548,7 +548,9 @@ export async function activate(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage('URL not provided!');
         return;
       }
-      if(!URL.canParse(url)) {
+      try {
+        new URL(url);
+      } catch (e) {
         vscode.window.showErrorMessage(`Could not display website! Invalid URL: "${url}"`);
         return;
       }
